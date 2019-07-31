@@ -105,7 +105,7 @@ public class PlatformView extends SurfaceView implements Runnable {
 
                     // check collisions with player
                     int hit = lm.player().checkCollisions(go.getHitbox());
-                    //hit = go instanceof Player?0:hit;
+                    hit = go instanceof Player?0:hit;
                     if (hit > 0) {
                         switch (go.getType()) {
                             case 'c':
@@ -141,6 +141,8 @@ public class PlatformView extends SurfaceView implements Runnable {
                                 lm.player().setWorldLocationX(location.x);
                                 lm.player().setWorldLocationY(location.y);
                                 lm.player().setxVelocity(0);
+                                go.setActive(false);
+                                go.setVisible(false);
                                 break;
                             case 'g':
                                 sm.play(SoundManager.Sound.BURN);
@@ -242,7 +244,7 @@ public class PlatformView extends SurfaceView implements Runnable {
                 lm.player().setxVelocity(0);
             }
             // check if game is over
-            if (ps.getLives() == 0) {
+            if (ps.getLives() <= 0) {
                 ps = new PlayerState();
                 loadLevel("LevelCave", 1, 16);
             }
