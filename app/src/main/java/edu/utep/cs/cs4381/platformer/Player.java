@@ -1,12 +1,15 @@
 package edu.utep.cs.cs4381.platformer;
 
 import android.content.Context;
+import android.util.Log;
 
 public class Player extends GameObject {
 
     private static final float MAX_X_VELOCITY = 10;
+
     private boolean isPressingRight = false;
     private boolean isPressingLeft = false;
+
     public boolean isFalling;
     private boolean isJumping;
     private long jumpTime;
@@ -138,6 +141,8 @@ public class Player extends GameObject {
             this.setWorldLocationY(rectHitbox.bottom);
             collided = 3;
         }
+
+
         return collided;
     }
 

@@ -1,6 +1,5 @@
 package edu.utep.cs.cs4381.platformer;
 
-
 public class BackgroundData {
     String bitmapName;
     boolean isParallax; // not used

@@ -3,6 +3,7 @@ package edu.utep.cs.cs4381.platformer;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Display;
 
 public class MainActivity extends AppCompatActivity {

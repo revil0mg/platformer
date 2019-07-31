@@ -1,5 +1,7 @@
 package edu.utep.cs.cs4381.platformer;
 
+import android.util.Log;
+
 public class RectHitbox {
     protected float top;
     protected float left;
@@ -12,6 +14,7 @@ public class RectHitbox {
                 && this.left < rectHitbox.right )
                 && (this.top < rectHitbox.bottom
                 && this.bottom > rectHitbox.top);
+
     }
 
     public void setTop(float y) {

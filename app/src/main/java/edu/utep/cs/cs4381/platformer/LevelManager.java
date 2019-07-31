@@ -8,8 +8,9 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: Teleport to next level on command
+//TODO: Teleport to next level on command (put t close to bob)
 //TODO: Add Shield to Bob + item
+//TODO: Fix "Earthquake" (Spawning 2 Bobs) or 2 Bob hitboxes. 2 platformViews created
 public class LevelManager {
     private String level;
     protected int mapWidth;
@@ -28,6 +29,7 @@ public class LevelManager {
 
     public LevelManager(Context context, int pixelsPerMeter, int screenWidth,
                         InputController ic, String level, float px, float py) {
+        Log.e("+==================+", "Lvl Mngr Created");
         this.level = level;
         switch (level) {
             case "LevelCave":
@@ -141,7 +143,8 @@ public class LevelManager {
             case 't':
                 index = 22;
                 break;
-
+            case 'o':
+                index = 23;
         }
         return index;
     }
@@ -165,6 +168,7 @@ public class LevelManager {
                             gameObjects.add(new Grass(j, i, c));
                             break;
                         case 'p':
+                            Log.e("+==================+", "Player Created");
                             player = new Player(context, px, py, pixelsPerMeter);
                             gameObjects.add(player);
                             playerIndex = currentIndex;
@@ -229,6 +233,9 @@ public class LevelManager {
                         case 't':
                             teleportIndex++;
                             gameObjects.add(new Teleport(j, i, c, levelData.locations.get(teleportIndex)));
+                            break;
+                        case 'o':
+                            gameObjects.add(new Shield(j, i, c));
                             break;
                     }
                     if (bitmapsArray[getBitmapIndex(c)] == null) {

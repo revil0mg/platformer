@@ -96,7 +96,6 @@ public class PlatformView extends SurfaceView implements Runnable {
 
     private void update() {
         for (GameObject go : lm.gameObjects) {
-
             if (go.isActive()) {
                 boolean clipped = vp.clipObject(go.getWorldLocation().x, go.getWorldLocation().y, go.getWidth(), go.getHeight());
                 go.setVisible(!clipped);
@@ -106,7 +105,7 @@ public class PlatformView extends SurfaceView implements Runnable {
 
                     // check collisions with player
                     int hit = lm.player().checkCollisions(go.getHitbox());
-                    hit = go instanceof Player?0:hit;
+                    //hit = go instanceof Player?0:hit;
                     if (hit > 0) {
                         switch (go.getType()) {
                             case 'c':
@@ -164,6 +163,15 @@ public class PlatformView extends SurfaceView implements Runnable {
                                 Location t = teleport.getTarget();
                                 loadLevel(t.level, t.x, t.y);
                                 sm.play(SoundManager.Sound.TELEPORT);
+                                break;
+                            case 'o':
+                                go.setActive(false);
+                                go.setVisible(false);
+                                sm.play(SoundManager.Sound.EXTRA_LIFE);
+                                ps.addLife();
+                                if (hit != 2) {
+                                    lm.player().restorePreviousVelocity();
+                                }
                                 break;
 
                             default:
@@ -349,24 +357,24 @@ public class PlatformView extends SurfaceView implements Runnable {
                 canvas.drawRoundRect(rf, 15f, 15f, paint);
             }
 
-            // Text for debugging
-//            if (debugging) {
-//                paint.setTextSize(16);
-//                paint.setTextAlign(Paint.Align.LEFT);
-//                paint.setColor(Color.argb(255, 255, 255, 255));
-//                canvas.drawText("fps:" + fps, 10, 60, paint);
-//                canvas.drawText("num objects:" + lm.gameObjects.size(), 10, 80, paint);
-//                canvas.drawText("num clipped:" + vp.getNumClipped(), 10, 100, paint);
-//                canvas.drawText("playerX:" + lm.gameObjects.get(lm.playerIndex).getWorldLocation().x, 10, 120, paint);
-//                canvas.drawText("playerY:" + lm.gameObjects.get(lm.playerIndex).getWorldLocation().y, 10, 140, paint);
-//
-//                canvas.drawText("Gravity:" + lm.gravity, 10, 160, paint);
-//                canvas.drawText("X velocity:" + lm.gameObjects.get(lm.playerIndex).getxVelocity(), 10, 180, paint);
-//                canvas.drawText("Y velocity:" + lm.gameObjects.get(lm.playerIndex).getyVelocity(), 10, 200, paint);
-//
-//                //for reset the number of clipped objects each frame
-//                vp.resetNumClipped();
-//            }
+//           Text for debugging
+            if (debugging) {
+                paint.setTextSize(24);
+                paint.setTextAlign(Paint.Align.LEFT);
+                paint.setColor(Color.argb(255, 255, 255, 255));
+                canvas.drawText("fps:" + fps, 10, 60, paint);
+                canvas.drawText("num objects:" + lm.gameObjects.size(), 10, 80, paint);
+                canvas.drawText("num clipped:" + vp.getNumClipped(), 10, 100, paint);
+                canvas.drawText("playerX:" + lm.gameObjects.get(lm.playerIndex).getWorldLocation().x, 10, 120, paint);
+                canvas.drawText("playerY:" + lm.gameObjects.get(lm.playerIndex).getWorldLocation().y, 10, 140, paint);
+
+                canvas.drawText("Gravity:" + lm.gravity, 10, 160, paint);
+                canvas.drawText("X velocity:" + lm.gameObjects.get(lm.playerIndex).getxVelocity(), 10, 180, paint);
+                canvas.drawText("Y velocity:" + lm.gameObjects.get(lm.playerIndex).getyVelocity(), 10, 200, paint);
+
+                //for reset the number of clipped objects each frame
+                vp.resetNumClipped();
+            }
 
                 // draw paused text
             if (!lm.isPlaying()) {
