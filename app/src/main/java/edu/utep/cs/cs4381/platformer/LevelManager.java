@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //TODO: Teleport to next level on command (put t close to bob)
-//TODO: Add Shield to Bob + item
+//TODO: Make shield interact with enemy drone. Add graphic if time allows
 //TODO: Fix "Earthquake" (Spawning 2 Bobs) or 2 Bob hitboxes. 2 platformViews created
 public class LevelManager {
     private String level;

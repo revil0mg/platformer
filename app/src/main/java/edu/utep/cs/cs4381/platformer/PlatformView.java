@@ -165,10 +165,11 @@ public class PlatformView extends SurfaceView implements Runnable {
                                 sm.play(SoundManager.Sound.TELEPORT);
                                 break;
                             case 'o':
+                                //Shield logic
                                 go.setActive(false);
                                 go.setVisible(false);
                                 sm.play(SoundManager.Sound.EXTRA_LIFE);
-                                ps.addLife();
+                                ps.addShield();
                                 if (hit != 2) {
                                     lm.player().restorePreviousVelocity();
                                 }
@@ -340,7 +341,7 @@ public class PlatformView extends SurfaceView implements Runnable {
             paint.setTextSize(vp.getPixelsPerMeterY() / 2);
             paint.setTextAlign(Paint.Align.CENTER);
             paint.setColor(Color.argb(100, 0, 0, 0));
-            canvas.drawRect(0,0,iconSize * 7.0f, topSpace*2 + iconSize,paint);
+            canvas.drawRect(0,0,iconSize * 9.0f, topSpace*2 + iconSize,paint);
             paint.setColor(Color.argb(255, 255, 255, 0));
             canvas.drawBitmap(lm.getBitmap('e'), 0, topSpace, paint);
             canvas.drawText("" + ps.getLives(), (iconSize * 1) + padding, iconSize - centring, paint);
@@ -348,6 +349,8 @@ public class PlatformView extends SurfaceView implements Runnable {
             canvas.drawText("" + ps.getCredits(), (iconSize * 3.5f) + padding * 2, iconSize - centring, paint);
             canvas.drawBitmap(lm.getBitmap('u'), iconSize * 5.0f + padding, topSpace, paint);
             canvas.drawText("" + ps.getFireRate(), iconSize * 6.0f + padding * 2, iconSize - centring, paint);
+            canvas.drawBitmap(lm.getBitmap('o'), iconSize * 7.0f + padding, topSpace, paint);
+            canvas.drawText("" + ps.getShields(), iconSize * 8.0f + padding * 2, iconSize - centring, paint);
 
             // draw buttons
             paint.setColor(Color.argb(80, 255, 255, 255));

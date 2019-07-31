@@ -7,6 +7,7 @@ public class PlayerState {
     private int numCredits;
     private int mgFireRate;
     private int lives;
+    private int shields;
     private float restartX;
     private float restartY;
 
@@ -14,6 +15,7 @@ public class PlayerState {
         lives = 3;
         mgFireRate = 1;
         numCredits = 0;
+        shields = 1;
     }
 
     public void saveLocation(PointF location) {
@@ -56,6 +58,18 @@ public class PlayerState {
 
     public void addLife(){
         lives++;
+    }
+
+    public int getShields(){
+        return shields;
+    }
+
+    public void loseShield() {
+        shields--;
+    }
+
+    public void addShield() {
+        shields++;
     }
 
     public void resetLives(){
