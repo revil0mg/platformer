@@ -1,14 +1,16 @@
 package edu.utep.cs.cs4381.platformer;
 
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.MotionEvent;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InputController {
 
-    private Rect left, right, jump, shoot, pause;
+    private Rect left, right, jump, shoot, pause, shieldBtn;
 
     public InputController(int screenWidth, int screenHeight) {
         //Configure the player buttons
@@ -40,6 +42,11 @@ public class InputController {
                 buttonPadding,
                 screenWidth - buttonPadding,
                 buttonPadding + buttonHeight);
+
+        shieldBtn = new Rect(screenWidth - (buttonWidth * 2) - buttonPadding*2,
+                screenHeight - buttonHeight - buttonPadding,
+                screenWidth - buttonPadding*2 - buttonWidth,
+                screenHeight - buttonPadding);
     }
 
     public List<Rect> getButtons() {
@@ -50,6 +57,7 @@ public class InputController {
         currentButtonList.add(jump);
         currentButtonList.add(shoot);
         currentButtonList.add(pause);
+        currentButtonList.add(shieldBtn);
         return  currentButtonList;
     }
 
@@ -76,7 +84,10 @@ public class InputController {
                             }
                         } else if (pause.contains(x, y)) {
                             lm.switchPlayingStatus();
+                        } else if (shieldBtn.contains(x, y)) {
+                            lm.player().shield.activateShield(System.currentTimeMillis());
                         }
+
                         break;
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_POINTER_UP:

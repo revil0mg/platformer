@@ -8,6 +8,7 @@ public class PlayerState {
     private int mgFireRate;
     private int lives;
     private int shields;
+    private boolean shieldIsActive;
     private float restartX;
     private float restartY;
 
@@ -16,6 +17,7 @@ public class PlayerState {
         mgFireRate = 1;
         numCredits = 0;
         shields = 1;
+        shieldIsActive = false;
     }
 
     public void saveLocation(PointF location) {
@@ -53,7 +55,13 @@ public class PlayerState {
     }
 
     public void loseLife(){
-        lives--;
+        if (!shieldIsActive())
+            lives--;
+
+    }
+
+    private boolean shieldIsActive() {
+        return shieldIsActive;
     }
 
     public void addLife(){

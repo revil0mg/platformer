@@ -235,7 +235,7 @@ public class LevelManager {
                             gameObjects.add(new Teleport(j, i, c, levelData.locations.get(teleportIndex)));
                             break;
                         case 'o':
-                            gameObjects.add(new Shield(j, i, c));
+                            gameObjects.add(new ShieldUpgrade(j, i, c));
                             break;
                     }
                     if (bitmapsArray[getBitmapIndex(c)] == null) {

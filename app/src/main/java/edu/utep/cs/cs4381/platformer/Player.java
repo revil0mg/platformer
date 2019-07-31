@@ -21,6 +21,7 @@ public class Player extends GameObject {
     private RectHitbox rectHitboxRight;
 
     protected MachineGun bfg;
+    protected Shield shield;
 
     public Player(Context context, float worldStartX, float worldStartY, int pixelsPerMetre) {
         final float HEIGHT = 2;
@@ -43,6 +44,7 @@ public class Player extends GameObject {
         setVisible(true);
 
         bfg = new MachineGun();
+        shield = new Shield();
         
         // Set this object up to be animated
         final int ANIMATION_FPS = 16;
@@ -142,7 +144,6 @@ public class Player extends GameObject {
             collided = 3;
         }
 
-
         return collided;
     }
 
@@ -184,5 +185,6 @@ public class Player extends GameObject {
             }
         }
     }
+
 
 }

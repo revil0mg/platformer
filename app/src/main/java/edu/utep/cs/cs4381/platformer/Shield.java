@@ -1,17 +1,32 @@
 package edu.utep.cs.cs4381.platformer;
 
-public class Shield extends GameObject {
+import android.util.Log;
 
-    public Shield(float worldStartX, float worldStartY, char type) {
-        final float HEIGHT = .8f;
-        final float WIDTH = .65f;
-        setHeight(HEIGHT);
-        setWidth(WIDTH);
-        setType(type);
-        setBitmapName("shield");
-        setWorldLocation(worldStartX, worldStartY, 0);
-        setRectHitbox();
+public class Shield {
+
+    private int duration;
+    private int shieldAmount;
+    private boolean shieldIsActive;
+
+    public Shield() {
+        shieldAmount = 1;
+        duration = 5000; // 5 seconds
     }
 
-    public void update(long fps, float gravity) {}
+    public void upgradeShield() {
+        shieldAmount++;
+    }
+
+    public void activateShield(long timeActivated) {
+        shieldIsActive = true;
+
+        if (System.currentTimeMillis() - timeActivated > duration) {
+            Log.e("==============++", "Shield Activated");
+            deactivateShield();
+        }
+    }
+
+    public void deactivateShield() {
+        shieldIsActive = false;
+    }
 }
